@@ -7,24 +7,22 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
-
 export default function Header() {
-    const navigate = useNavigate();
-    const {user,setUser} = useContext(UserContext);
-    if(user==null)
-    {
-        navigate('/login');
-    }
-    function handleLogout() {
-        localStorage.removeItem('access_token');
-        setUser(null);
-        toast.success('Logged Out!.')
-        navigate('/login');
-    }
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  if (user == null) {
+    navigate("/login");
+  }
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setUser(null);
+    toast.success("Logged Out!.");
+    navigate("/login");
+  }
   return (
     <header className=" border-b-2 p-5">
       <div className="flex justify-between">
-        <div className="flex  gap-2 items-center" onClick={()=>navigate('/')}>
+        <div className="flex  gap-2 items-center" onClick={() => navigate("/")}>
           <IoFastFood />
           <h1 className=" font-semibold">Recipe Finder</h1>
         </div>
@@ -35,7 +33,6 @@ export default function Header() {
             <span className="text-sm">{user?.username}</span>
           </div>
           <IoIosLogOut onClick={handleLogout} />
-
         </div>
       </div>
     </header>

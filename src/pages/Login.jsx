@@ -14,7 +14,7 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  const {user,setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const onSubmit = async (data) => {
@@ -27,12 +27,12 @@ export default function Signup() {
         password,
       });
       console.log(result);
-      localStorage.setItem('access_token',result.data.token);
-      setUser({"id":result.data.id, "username":result.data.username})
+      localStorage.setItem("token", result.data.token);
+      setUser({ id: result.data.id, username: result.data.username });
 
-      toast.success('Login successfull.');
+      toast.success("Login successfull.");
 
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
       if (error.response) {

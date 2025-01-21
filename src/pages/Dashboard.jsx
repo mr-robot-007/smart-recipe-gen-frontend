@@ -41,7 +41,7 @@ export default function Dashboard() {
         setLoading(true);
         const result = await axios.get(`${backendUrl}/recipes/all`, {
           headers: {
-            access_token: localStorage.getItem("access_token"),
+            token: localStorage.getItem("token"),
           },
         });
         console.log(result.data);
@@ -63,7 +63,7 @@ export default function Dashboard() {
         setLoading(true);
         const result = await axios.get(`${backendUrl}/recipes/recent/${user.id}`, {
           headers: {
-            access_token: localStorage.getItem("access_token"),
+            token: localStorage.getItem("token"),
           },
         });
         console.log(result.data);

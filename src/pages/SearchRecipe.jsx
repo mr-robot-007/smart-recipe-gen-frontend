@@ -18,8 +18,14 @@ import { RecipeContext } from "../Context/RecipeContext";
 
 export default function SearchRecipe() {
   const [ing, setIng] = useState([]);
-  const { recipes, setRecipes, ingredients, setIngredients,searchResults, setSearchResults } =
-    useContext(RecipeContext);
+  const {
+    recipes,
+    setRecipes,
+    ingredients,
+    setIngredients,
+    searchResults,
+    setSearchResults,
+  } = useContext(RecipeContext);
   const [options, setOptions] = useState([]);
 
   const navigate = useNavigate();
@@ -29,14 +35,11 @@ export default function SearchRecipe() {
     async function fetchRecipes() {
       try {
         setLoading(true);
-        const result = await axios.get(
-          `${backendUrl}/recipes/ingredients`,
-          {
-            headers: {
-              access_token: localStorage.getItem("access_token"),
-            },
-          }
-        );
+        const result = await axios.get(`${backendUrl}/recipes/ingredients`, {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        });
         // console.log(result.data);
         const flattendedData = result.data.map((ing) => ({
           value: ing,
@@ -53,7 +56,7 @@ export default function SearchRecipe() {
       setLoading(false);
     }
     fetchRecipes();
-  }, [navigate,backendUrl]);
+  }, [navigate, backendUrl]);
 
   const handleChange = (options) => {
     const optionValues = options.map((option) => option.value);
@@ -68,7 +71,7 @@ export default function SearchRecipe() {
         { ingredients: ing },
         {
           headers: {
-            access_token: localStorage.getItem("access_token"),
+            token: localStorage.getItem("token"),
           },
         }
       );
@@ -129,7 +132,7 @@ export default function SearchRecipe() {
             setRecipes={setRecipes}
             setLoading={setLoading}
             loading={loading}
-            setIng = {setIng}
+            setIng={setIng}
           />
         </div>
       </div>

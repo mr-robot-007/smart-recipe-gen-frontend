@@ -32,7 +32,7 @@ export default function SelectFromPhotos({
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              access_token: localStorage.getItem("access_token"),
+              token: localStorage.getItem("token"),
             },
           }
         );
